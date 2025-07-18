@@ -10,19 +10,41 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
-// model Loja {
-  
-// }
+ model User {
+  id Int @id  @default(autoincrement())
+  name String
+  email String @unique
+  password String
+  role ROLE @default(FUNCIONARIO)
+  lojaId Int
+ }
 
-// model User {
+model Store {
+  id Int @id  @default(autoincrement())
+  name String
+  FinanceRequest []
+}
 
-// }
 
-// model Solicitacoes {
-  
-// }
+model FinanceRequest {
+    description String 
+    createdAt DateTime @default(now())
+    solicitante Int
+    lojaId Int
+    value Float
+    status STATUS @default(AGUARDANDO)
+}
 
+enum ROLE {
+    ADMIN
+    FUNCIONARIO
+}
+
+enum STATUS {
+    APROVADO
+    AGUARDANDO
+}
