@@ -1,15 +1,21 @@
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import { JsonController, Post, Body, HttpCode } from 'routing-controllers';
+import { AuthService } from '../services/AuthService';
+import { LoginDTO } from '../dtos/LoginDTO';
+// import { RegisterDTO } from '../dtos/RegisterDTO';
 
-interface User {
-    email: string;
-    password: string;
-}
+@JsonController('/auth')
+export class AuthController {
+    private service = new AuthService();
 
-export class AuthService {
-    private JWT_SECRET = process.env.JWT_SECRET || 'default-secret';
+    @Post('/login')
+    @HttpCode(200)
+    login(@Body() body: LoginDTO) {
+        return this.service.login(body);
+    }
 
-    async register(email: string, password: string): Promise<string> {}
-
-    async login(email: string, password: string): Promise<User> {}
+    @Post('/register')
+    @HttpCode(201)
+    register(@Body() body: RegisterDTO) {
+        return this.service.register(body);
+    }
 }
