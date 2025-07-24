@@ -44,11 +44,11 @@ model FinanceRequest {
     status        STATUS            @default(AGUARDANDO)
 
     solicitante   Int
-    user          User                @relation("UserRequest", fields: [solicitante], references: [id])
+    user          User              @relation("UserRequest", fields: [solicitante], references: [id])
 
 
    lojaId         Int
-   loja           Store               @relation(fields: [lojaId], references: [id])
+   loja           Store             @relation(fields: [lojaId], references: [id])
 }
 
 enum ROLE {
