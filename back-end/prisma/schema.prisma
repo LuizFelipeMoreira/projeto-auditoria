@@ -32,12 +32,12 @@ model Store {
   id              Int              @id  @default(autoincrement())
   name            String
   users           User[]
-  financesReuests FinanceRequest[]
+  financesRequests FinanceRequest[]
 }
 
 
 model FinanceRequest {
-    id            Int               @id @default(autoincrement())
+    id            Int              @id @default(autoincrement())
     description   String 
     createdAt     DateTime          @default(now())
     value         Float
