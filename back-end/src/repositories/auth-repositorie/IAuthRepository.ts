@@ -1,9 +1,9 @@
-import { Prisma } from '../../generated/prisma';
+import { Prisma, User } from '../../generated/prisma';
 
 export interface IUserRepository {
-    create(data: Prisma.UserCreateInput): Promise<Prisma.UserCreateInput | null>;
+    create(data: Prisma.UserCreateInput): Promise<User | null>;
 
-    findByEmail(email: string): Promise<Prisma.UserCreateInput | null>;
+    findByEmail(email: string): Promise<User | null>;
 
-    findUserById(id: number): Promise<Prisma.UserCreateInput | null>;
+    findById(id: number): Promise<User | null>;
 }
