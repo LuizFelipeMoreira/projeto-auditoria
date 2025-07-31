@@ -1,15 +1,7 @@
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import { JsonController, Post, Body, HttpCode } from 'routing-controllers';
+import { AuthService } from '../services/AuthService';
 
-interface User {
-    email: string;
-    password: string;
-}
-
-export class AuthService {
-    private JWT_SECRET = process.env.JWT_SECRET || 'default-secret';
-
-    async register(email: string, password: string): Promise<string> {}
-
-    async login(email: string, password: string): Promise<User> {}
+@JsonController('/auth')
+export class AuthController {
+    private service = new AuthService();
 }
