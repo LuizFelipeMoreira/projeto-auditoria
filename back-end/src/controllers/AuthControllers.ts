@@ -3,5 +3,5 @@ import { AuthService } from '../services/AuthService';
 
 @JsonController('/auth')
 export class AuthController {
-    private service = new AuthService();
+    private readonly service = new AuthService();
 }
