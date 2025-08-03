@@ -13,7 +13,7 @@ export class AuthService {
         const hash = await hashPassword(data.password);
         const newUser = await this.authRepository.create({ ...data, password: hash });
 
-        return { newUser };
+        return { id: newUser.id, name: newUser.name, email: newUser.email };
     }
 
     async login(email: string, password: string) {
@@ -29,7 +29,7 @@ export class AuthService {
 
         return {
             token,
-            existingUser,
+            user: { id, name, email },
         };
     }
 }
