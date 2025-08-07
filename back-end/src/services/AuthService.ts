@@ -23,13 +23,13 @@ export class AuthService {
         const correctPassword = await decodedPassword(password, existingUser.password);
         if (!correctPassword) return null;
 
-        const { id, name } = existingUser;
+        const { id, name, lojaId, role } = existingUser;
 
         const token = generateToken({ id, name, email });
 
         return {
             token,
-            user: { id, name, email },
+            user: { id, name, email, role, lojaId },
         };
     }
 }

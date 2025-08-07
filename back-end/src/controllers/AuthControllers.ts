@@ -1,7 +1,6 @@
 import {
     BadRequestError,
     Body,
-    Get,
     HttpCode,
     JsonController,
     Post,
@@ -17,11 +16,7 @@ interface UserRequest {
 
 @JsonController('/auth')
 export class AuthController {
-    private readonly authService = new AuthService();
-
-    constructor() {
-        console.log('AuthController carregado');
-    }
+    constructor(private readonly authService = new AuthService()) {}
 
     @Post('/signup')
     @HttpCode(201)
