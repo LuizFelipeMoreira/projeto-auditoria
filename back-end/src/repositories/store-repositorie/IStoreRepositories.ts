@@ -1,4 +1,7 @@
+import { Store } from '../../generated/prisma';
+
 export interface IStoreRepositories {
-    create(): Promise<void>;
-    update(): Promise<void>;
+    create(name: string): Promise<Store>;
+
+    update(id: number, name: string): Promise<void>;
 }
