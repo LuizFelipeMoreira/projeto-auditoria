@@ -4,6 +4,7 @@ import 'reflect-metadata';
 import { useExpressServer } from 'routing-controllers';
 import { AuthController } from './controllers/AuthControllers';
 import { StoreController } from './controllers/StoreController';
+import { LoggerMiddleware } from './middlewares/ErrorHandler';
 
 const app = express();
 
@@ -11,7 +12,7 @@ app.use(cors());
 
 useExpressServer(app, {
     controllers: [AuthController, StoreController],
-    middlewares: [],
+    middlewares: [LoggerMiddleware],
     validation: true,
     development: true,
 });
