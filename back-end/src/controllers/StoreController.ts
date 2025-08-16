@@ -10,4 +10,12 @@ import {
 @JsonController('/store')
 export class StoreController {
     constructor(private readonly storeService = new StoreService()) {}
+
+    @Post('/create')
+    @HttpCode(201)
+    async create() {}
+
+    @Post('/update')
+    @HttpCode(200)
+    async update() {}
 }
