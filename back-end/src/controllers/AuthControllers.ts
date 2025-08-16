@@ -21,7 +21,9 @@ export class AuthController {
     @Post('/signup')
     @HttpCode(201)
     public async signup(@Body() body: Prisma.UserCreateInput) {
-        const user = this.authService.register(body);
+        const user = await this.authService.register(body);
+
+        console.log(user);
 
         if (!user) {
             throw new BadRequestError('Usuario ja existe');
@@ -33,7 +35,7 @@ export class AuthController {
     @Post('/signin')
     @HttpCode(201)
     public async signin(@Body() body: UserRequest) {
-        const user = this.authService.login(body.email, body.password);
+        const user = await this.authService.login(body.email, body.password);
 
         if (!user) {
             throw new BadRequestError('Usuario ja existe');
