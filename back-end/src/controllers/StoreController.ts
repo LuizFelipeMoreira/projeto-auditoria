@@ -13,9 +13,9 @@ export class StoreController {
 
     @Post('/create')
     @HttpCode(201)
-    async create() {}
+    async createStore() {}
 
     @Post('/update')
     @HttpCode(200)
-    async update() {}
+    async updateStore() {}
 }
