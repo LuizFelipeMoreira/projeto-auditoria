@@ -8,6 +8,8 @@ export class StoreService {
     }
 
     async update(id: number, name: string) {
-        return await this.storeRepository.update(id, name);
+        await this.storeRepository.update(id, name);
+
+        return { id, name };
     }
 }

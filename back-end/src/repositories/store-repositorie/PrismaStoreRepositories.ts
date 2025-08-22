@@ -3,7 +3,7 @@ import { IStoreRepositories } from './IStoreRepositories';
 
 class StoreRepository implements IStoreRepositories {
     async create(name: string) {
-        const store = prisma.store.create({
+        const store = await prisma.store.create({
             data: {
                 name,
             },
@@ -12,7 +12,7 @@ class StoreRepository implements IStoreRepositories {
     }
 
     async update(id: number, name: string) {
-        prisma.store.update({
+        await prisma.store.update({
             where: { id },
             data: { name },
         });
