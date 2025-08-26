@@ -2,7 +2,7 @@ import { FinanceRequest, Prisma } from '../../generated/prisma';
 import { prisma } from '../../lib/prisma';
 import { IFinanceRequest } from './IFinanceResquestRepositories';
 
-export class PrismaFinanceRequestRepository implements IFinanceRequest {
+class PrismaFinanceRequestRepository implements IFinanceRequest {
     async create(finance: Prisma.FinanceRequestCreateInput) {
         const newFinance = await prisma.financeRequest.create({ data: { ...finance } });
         return newFinance;
@@ -21,3 +21,5 @@ export class PrismaFinanceRequestRepository implements IFinanceRequest {
         await prisma.financeRequest.delete({ where: { id } });
     }
 }
+
+export default new PrismaFinanceRequestRepository();

@@ -1,7 +1,7 @@
 import { prisma } from '../../lib/prisma';
 import { IStoreRepositories } from './IStoreRepositories';
 
-class StoreRepository implements IStoreRepositories {
+class PrismaStoreRepository implements IStoreRepositories {
     async create(name: string) {
         const store = await prisma.store.create({
             data: {
@@ -19,4 +19,4 @@ class StoreRepository implements IStoreRepositories {
     }
 }
 
-export default new StoreRepository();
+export default new PrismaStoreRepository();
