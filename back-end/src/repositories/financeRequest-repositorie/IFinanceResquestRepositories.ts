@@ -6,4 +6,6 @@ export interface IFinanceRequest {
     update: (finance: FinanceRequest) => Promise<FinanceRequest>;
 
     delete: (id: number) => Promise<void>;
+
+    getFinanceByDescription: (description: string) => Promise<FinanceRequest[] | null>;
 }

@@ -20,6 +20,16 @@ class PrismaFinanceRequestRepository implements IFinanceRequest {
     async delete(id: number) {
         await prisma.financeRequest.delete({ where: { id } });
     }
+
+    async getFinanceByDescription(description: string) {
+        const financeRequest = await prisma.financeRequest.findMany({
+            where: { description },
+        });
+
+        if (!financeRequest) return null;
+
+        return financeRequest;
+    }
 }
 
 export default new PrismaFinanceRequestRepository();
