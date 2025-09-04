@@ -13,7 +13,7 @@ export class StoreController {
     @Post('/create')
     @HttpCode(201)
     async createStore(@Body() body: StoreRequest) {
-        const newStore = this.storeService.create(body.name);
+        const newStore = await this.storeService.create(body.name);
 
         return newStore;
     }
