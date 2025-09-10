@@ -1,14 +1,17 @@
-import { FinanceRequest, Prisma } from '../../generated/prisma';
+import {
+    FinanceRequestDTO,
+    FinanceRequestResponseDTO,
+} from '../../dto/FInanceRequestDto';
 import { prisma } from '../../lib/prisma';
 import { IFinanceRequest } from './IFinanceResquestRepositories';
 
 class PrismaFinanceRequestRepository implements IFinanceRequest {
-    async create(finance: Prisma.FinanceRequestCreateInput) {
+    async create(finance: FinanceRequestDTO) {
         const newFinance = await prisma.financeRequest.create({ data: { ...finance } });
         return newFinance;
     }
 
-    async update(finance: FinanceRequest) {
+    async update(finance: FinanceRequestResponseDTO) {
         await prisma.financeRequest.update({
             where: { id: finance.id },
             data: { ...finance },

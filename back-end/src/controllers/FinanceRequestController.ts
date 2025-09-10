@@ -1,6 +1,6 @@
 import { Post, Body, JsonController, HttpCode } from 'routing-controllers';
 import { FinanceRequestService } from '../services/FinanceRequestService';
-import { FinanceRequest, Prisma } from '../generated/prisma';
+import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FInanceRequestDto';
 
 @JsonController('/finance')
 export class FinanceRequestController {
@@ -8,13 +8,13 @@ export class FinanceRequestController {
 
     @Post('/new')
     @HttpCode(201)
-    async create(@Body() body: Prisma.FinanceRequestCreateInput) {
+    async create(@Body() body: FinanceRequestDTO) {
         return await this.financeRequestService.create(body);
     }
 
     @Post('/update')
     @HttpCode(201)
-    async update(@Body() body: FinanceRequest) {
+    async update(@Body() body: FinanceRequestResponseDTO) {
         return await this.financeRequestService.update(body);
     }
 }

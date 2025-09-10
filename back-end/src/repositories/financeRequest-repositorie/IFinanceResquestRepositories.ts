@@ -1,11 +1,16 @@
-import { FinanceRequest, Prisma } from '../../generated/prisma';
+import {
+    FinanceRequestDTO,
+    FinanceRequestResponseDTO,
+} from '../../dto/FInanceRequestDto';
 
 export interface IFinanceRequest {
-    create: (finance: Prisma.FinanceRequestCreateInput) => Promise<FinanceRequest>;
+    create: (finance: FinanceRequestDTO) => Promise<FinanceRequestResponseDTO>;
 
-    update: (finance: FinanceRequest) => Promise<FinanceRequest>;
+    update: (finance: FinanceRequestResponseDTO) => Promise<FinanceRequestResponseDTO>;
 
     delete: (id: number) => Promise<void>;
 
-    getFinanceByDescription: (description: string) => Promise<FinanceRequest[] | null>;
+    getFinanceByDescription: (
+        description: string
+    ) => Promise<FinanceRequestResponseDTO[] | null>;
 }
