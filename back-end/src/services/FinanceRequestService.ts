@@ -1,6 +1,6 @@
 import { BadRequestError } from 'routing-controllers';
-import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FInanceRequestDto';
 import PrismaFinanceRequestRepository from '../repositories/financeRequest-repositorie/PrismaFinanceRequestRepository';
+import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FInanceRequestDto';
 
 export class FinanceRequestService {
     constructor(
@@ -13,6 +13,8 @@ export class FinanceRequestService {
         );
 
         if (!newFinanceRequest) throw new BadRequestError('Erro interno no servidor');
+
+        return newFinanceRequest;
     }
 
     async update(finance: FinanceRequestResponseDTO) {}
