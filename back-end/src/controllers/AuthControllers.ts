@@ -5,7 +5,6 @@ import {
     JsonController,
     Post,
 } from 'routing-controllers';
-import { Prisma } from '../generated/prisma';
 import { AuthService } from '../services/AuthService';
 import { LoginRequestDTO } from '../dto/LoginDTO';
 
