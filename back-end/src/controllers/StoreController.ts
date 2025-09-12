@@ -1,10 +1,6 @@
+import { StoreRequestDTO, StoreResponseDTO } from '../dto/StoreDTO';
 import { StoreService } from '../services/StoreService';
 import { Body, HttpCode, JsonController, Post } from 'routing-controllers';
-
-interface StoreRequest {
-    id: number;
-    name: string;
-}
 
 @JsonController('/store')
 export class StoreController {
@@ -12,7 +8,7 @@ export class StoreController {
 
     @Post('/create')
     @HttpCode(201)
-    async createStore(@Body() body: StoreRequest) {
+    async createStore(@Body() body: StoreRequestDTO) {
         const newStore = await this.storeService.create(body.name);
 
         return newStore;
@@ -20,7 +16,7 @@ export class StoreController {
 
     @Post('/update')
     @HttpCode(200)
-    async updateStore(@Body() body: StoreRequest) {
+    async updateStore(@Body() body: StoreResponseDTO) {
         const storeUpdated = await this.storeService.update(body.id, body.name);
 
         console.log(storeUpdated);
