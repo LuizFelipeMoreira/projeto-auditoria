@@ -1,4 +1,4 @@
-import { Prisma } from '../generated/prisma';
+import { LoginRequestDTO } from '../dto/LoginDTO';
 import AuthRepository from '../repositories/auth-repositorie/PrismaAuthRepository';
 import { decodedPassword, hashPassword } from '../utils/hash';
 import { generateToken } from '../utils/jwt';
@@ -6,7 +6,7 @@ import { generateToken } from '../utils/jwt';
 export class AuthService {
     constructor(private readonly authRepository = AuthRepository) {}
 
-    async register(data: Prisma.UserCreateInput) {
+    async register(data: LoginRequestDTO) {
         const existingUser = await this.authRepository.findByEmail(data.email);
         if (existingUser) return null;
 

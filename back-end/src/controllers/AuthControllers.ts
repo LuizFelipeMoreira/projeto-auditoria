@@ -7,6 +7,7 @@ import {
 } from 'routing-controllers';
 import { Prisma } from '../generated/prisma';
 import { AuthService } from '../services/AuthService';
+import { LoginRequestDTO } from '../dto/LoginDTO';
 
 interface UserRequest {
     name: string;
@@ -20,7 +21,7 @@ export class AuthController {
 
     @Post('/signup')
     @HttpCode(201)
-    public async signup(@Body() body: Prisma.UserCreateInput) {
+    public async signup(@Body() body: LoginRequestDTO) {
         const user = await this.authService.register(body);
 
         console.log(user);
