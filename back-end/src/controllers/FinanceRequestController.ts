@@ -1,6 +1,6 @@
-import { Post, Body, JsonController, HttpCode } from 'routing-controllers';
-import { FinanceRequestService } from '../services/FinanceRequestService';
+import { Body, HttpCode, JsonController, Post } from 'routing-controllers';
 import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FInanceRequestDto';
+import { FinanceRequestService } from '../services/FinanceRequestService';
 
 @JsonController('/finance')
 export class FinanceRequestController {
@@ -16,5 +16,11 @@ export class FinanceRequestController {
     @HttpCode(201)
     async update(@Body() body: FinanceRequestResponseDTO) {
         return await this.financeRequestService.update(body);
+    }
+
+    @Post('/getByDescription')
+    @HttpCode(200)
+    async getFinanceByDescription(@Body() body: { description: string }) {
+        return await this.financeRequestService.getFinanceByDescription(body.description);
     }
 }

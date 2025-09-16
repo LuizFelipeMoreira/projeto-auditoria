@@ -18,4 +18,14 @@ export class FinanceRequestService {
     }
 
     async update(finance: FinanceRequestResponseDTO) {}
+
+    async getFinanceByDescription(description: string) {
+        const finance = await this.financeRequestRepository.getFinanceByDescription(
+            description
+        );
+
+        if (!finance) throw new BadRequestError('nao foi possivel localizar solicitaçao');
+
+        return finance;
+    }
 }
