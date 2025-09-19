@@ -19,6 +19,12 @@ export class FinanceRequestService {
 
     async update(finance: FinanceRequestResponseDTO) {}
 
+    async getFinances(limit: number, offset: number) {
+        const finances = await this.financeRequestRepository.getFinances(limit, offset);
+
+        return finances;
+    }
+
     async getFinanceByDescription(description: string) {
         const finance = await this.financeRequestRepository.getFinanceByDescription(
             description

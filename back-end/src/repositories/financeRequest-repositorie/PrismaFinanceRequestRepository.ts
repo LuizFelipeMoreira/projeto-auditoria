@@ -24,6 +24,15 @@ class PrismaFinanceRequestRepository implements IFinanceRequest {
         await prisma.financeRequest.delete({ where: { id } });
     }
 
+    async getFinances(limit: number, offset: number) {
+        const finances = await prisma.financeRequest.findMany({
+            skip: offset,
+            take: limit,
+        });
+
+        return finances;
+    }
+
     async getFinanceByDescription(description: string) {
         const financeRequest = await prisma.financeRequest.findMany({
             where: { description },
