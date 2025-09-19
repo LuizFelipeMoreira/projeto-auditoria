@@ -1,4 +1,4 @@
-import { FinanceRequestResponseDTO } from './FInanceRequestDto';
+import { FinanceRequestResponseDTO } from './FInanceRequestDTO';
 
 export interface StoreRequestDTO {
     name: string;
