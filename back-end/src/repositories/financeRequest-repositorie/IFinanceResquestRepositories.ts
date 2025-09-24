@@ -1,7 +1,7 @@
 import {
     FinanceRequestDTO,
     FinanceRequestResponseDTO,
-} from '../../dto/FInanceRequestDto';
+} from '../../dto/FInanceRequestDTO';
 
 export interface IFinanceRequest {
     create: (finance: FinanceRequestDTO) => Promise<FinanceRequestResponseDTO>;

@@ -1,6 +1,6 @@
 import { BadRequestError } from 'routing-controllers';
 import PrismaFinanceRequestRepository from '../repositories/financeRequest-repositorie/PrismaFinanceRequestRepository';
-import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FInanceRequestDto';
+import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FInanceRequestDTO';
 
 export class FinanceRequestService {
     constructor(
@@ -17,7 +17,11 @@ export class FinanceRequestService {
         return newFinanceRequest;
     }
 
-    async update(finance: FinanceRequestResponseDTO) {}
+    async update(finance: FinanceRequestResponseDTO) {
+        const financeUpdated = await this.financeRequestRepository.update(finance);
+
+        return financeUpdated;
+    }
 
     async getFinances(limit: number, offset: number) {
         const finances = await this.financeRequestRepository.getFinances(limit, offset);
