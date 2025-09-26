@@ -18,6 +18,7 @@
         "cors": "^2.8.5",
         "express": "^5.1.0",
         "jsonwebtoken": "^9.0.2",
+        "nodemailer": "^7.0.6",
         "prisma": "^6.11.1",
         "reflect-metadata": "^0.2.2",
         "routing-controllers": "^0.11.2"
@@ -30,6 +31,7 @@
         "@types/express": "^5.0.3",
         "@types/jsonwebtoken": "^9.0.10",
         "@types/node": "^24.0.13",
+        "@types/nodemailer": "^7.0.1",
         "eslint": "^9.31.0",
         "globals": "^16.3.0",
         "ts-node-dev": "^2.0.0",

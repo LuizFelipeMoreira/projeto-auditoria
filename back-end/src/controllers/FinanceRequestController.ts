@@ -1,5 +1,5 @@
 import { Body, HttpCode, JsonController, Post } from 'routing-controllers';
-import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FInanceRequestDTO';
+import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FinanceRequestDTO';
 import { FinanceRequestService } from '../services/FinanceRequestService';
 
 @JsonController('/finance')

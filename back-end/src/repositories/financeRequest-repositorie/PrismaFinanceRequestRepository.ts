@@ -1,7 +1,7 @@
 import {
     FinanceRequestDTO,
     FinanceRequestResponseDTO,
-} from '../../dto/FInanceRequestDto';
+} from '../../dto/FinanceRequestDTO';
 import { prisma } from '../../lib/prisma';
 import { IFinanceRequest } from './IFinanceResquestRepositories';
 

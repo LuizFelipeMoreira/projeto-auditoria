@@ -1,6 +1,6 @@
 import { BadRequestError } from 'routing-controllers';
 import PrismaFinanceRequestRepository from '../repositories/financeRequest-repositorie/PrismaFinanceRequestRepository';
-import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FInanceRequestDTO';
+import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FinanceRequestDTO';
 
 export class FinanceRequestService {
     constructor(
