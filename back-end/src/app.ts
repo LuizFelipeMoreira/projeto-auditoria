@@ -7,10 +7,24 @@ import { StoreController } from './controllers/StoreController';
 import { LoggerMiddleware } from './middlewares/LoggerMiddleware';
 import { FinanceRequestController } from './controllers/FinanceRequestController';
 import { ErrorHandlerMiddleware } from './middlewares/ErrorHandlerMiddleware';
+//import { EmailService } from './services/EmailService';
 
 const app = express();
 
 app.use(cors());
+
+// const emailService = new EmailService();
+
+// emailService
+//     .sendEmail(
+//         'Felipe',
+//         'noturnog9@gmail.com',
+//         'luizfelipemlds65@gmail.com',
+//         'Teste de envio',
+//         'Esse aqui é apenas um teste de envio de e-mail'
+//     )
+//     .then((info) => console.log('E-mail enviado:', info))
+//     .catch((err) => console.error('Erro ao enviar:', err));
 
 useExpressServer(app, {
     controllers: [AuthController, StoreController, FinanceRequestController],
