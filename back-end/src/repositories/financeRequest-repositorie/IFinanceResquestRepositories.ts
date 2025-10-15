@@ -6,7 +6,7 @@ import {
 export interface IFinanceRequest {
     create: (finance: FinanceRequestDTO) => Promise<FinanceRequestResponseDTO>;
 
-    update: (finance: FinanceRequestResponseDTO) => Promise<FinanceRequestResponseDTO>;
+    update: (finance: FinanceRequestResponseDTO) => Promise<void>;
 
     delete: (id: number) => Promise<void>;
 

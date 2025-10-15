@@ -1,9 +1,11 @@
 import { BadRequestError } from 'routing-controllers';
-import PrismaFinanceRequestRepository from '../repositories/financeRequest-repositorie/PrismaFinanceRequestRepository';
 import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FinanceRequestDTO';
+import PrismaFinanceRequestRepository from '../repositories/financeRequest-repositorie/PrismaFinanceRequestRepository';
+import { EmailService } from './EmailService';
 
 export class FinanceRequestService {
     constructor(
+        private readonly emailService = new EmailService(),
         private readonly financeRequestRepository = PrismaFinanceRequestRepository
     ) {}
 
@@ -13,6 +15,8 @@ export class FinanceRequestService {
         );
 
         if (!newFinanceRequest) throw new BadRequestError('Erro interno no servidor');
+
+        console.log(newFinanceRequest);
 
         return newFinanceRequest;
     }

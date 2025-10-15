@@ -15,4 +15,13 @@ export interface FinanceRequestResponseDTO {
     status: $Enums.STATUS;
     solicitante: number;
     lojaId: number;
+    user: {
+        id: number;
+        name: string;
+        email: string;
+    };
+    loja: {
+        id: number;
+        name: string;
+    };
 }

@@ -7,17 +7,27 @@ import { IFinanceRequest } from './IFinanceResquestRepositories';
 
 class PrismaFinanceRequestRepository implements IFinanceRequest {
     async create(finance: FinanceRequestDTO) {
-        const newFinance = await prisma.financeRequest.create({ data: { ...finance } });
+        const newFinance = await prisma.financeRequest.create({
+            data: { ...finance },
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        name: true,
+                        email: true,
+                    },
+                },
+                loja: true,
+            },
+        });
         return newFinance;
     }
 
-    async update(finance: FinanceRequestResponseDTO) {
+    async update(finance: FinanceRequestDTO) {
         await prisma.financeRequest.update({
             where: { id: finance.id },
             data: { ...finance },
         });
-
-        return finance;
     }
 
     async delete(id: number) {
@@ -36,6 +46,16 @@ class PrismaFinanceRequestRepository implements IFinanceRequest {
     async getFinanceByDescription(description: string) {
         const financeRequest = await prisma.financeRequest.findMany({
             where: { description },
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        name: true,
+                        email: true,
+                    },
+                },
+                loja: true,
+            },
         });
 
         if (!financeRequest) return null;
