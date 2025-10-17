@@ -45,12 +45,7 @@ export class EmailService {
         value: number,
         description: string
     ): Promise<EmailSendResult> {
-        return await this.transporter.sendMail({
-            from: (name + ' ' + process.env.EMAIL_USER) as string,
-            to: process.env.EMAIL_ADMIN as string,
-            subject: 'Nova solicitaçao',
-            text: description,
-            html: `
+        const htmlBody = `
             <!DOCTYPE html>
             <html>
               <head>
@@ -124,7 +119,14 @@ export class EmailService {
                 </div>
               </body>
             </html>
-          `,
+          `;
+
+        return await this.transporter.sendMail({
+            from: (name + ' ' + process.env.EMAIL_USER) as string,
+            to: process.env.EMAIL_ADMIN as string,
+            subject: 'Nova solicitaçao',
+            text: description,
+            html: htmlBody,
         });
     }
 }
