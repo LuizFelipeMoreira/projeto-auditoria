@@ -16,7 +16,14 @@ export class FinanceRequestService {
 
         if (!newFinanceRequest) throw new BadRequestError('Erro interno no servidor');
 
-        console.log(newFinanceRequest);
+        const email = await this.emailService.notifyAdminSolicitation(
+            newFinanceRequest.user.name,
+            newFinanceRequest.loja.name,
+            newFinanceRequest.value,
+            newFinanceRequest.description
+        );
+
+        console.log(email);
 
         return newFinanceRequest;
     }
