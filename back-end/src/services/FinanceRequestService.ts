@@ -1,12 +1,12 @@
 import { BadRequestError } from 'routing-controllers';
 import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FinanceRequestDTO';
-import PrismaFinanceRequestRepository from '../repositories/financeRequest-repositorie/PrismaFinanceRequestRepository';
+import { PrismaFinanceRequestRepository } from '../repositories/financeRequest-repositorie/PrismaFinanceRequestRepository';
 import { EmailService } from './EmailService';
 
 export class FinanceRequestService {
     constructor(
         private readonly emailService: EmailService,
-        private readonly financeRequestRepository = PrismaFinanceRequestRepository
+        private readonly financeRequestRepository: PrismaFinanceRequestRepository
     ) {}
 
     async create(financeRequest: FinanceRequestDTO) {

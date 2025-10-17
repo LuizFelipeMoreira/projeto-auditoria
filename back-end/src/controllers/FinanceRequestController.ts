@@ -1,10 +1,19 @@
 import { Body, HttpCode, JsonController, Post } from 'routing-controllers';
 import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FinanceRequestDTO';
+import { PrismaFinanceRequestRepository } from '../repositories/financeRequest-repositorie/PrismaFinanceRequestRepository';
+import { EmailService } from '../services/EmailService';
 import { FinanceRequestService } from '../services/FinanceRequestService';
 
 @JsonController('/finance')
 export class FinanceRequestController {
-    constructor(private readonly financeRequestService = new FinanceRequestService()) {}
+    private financeRequestService: FinanceRequestService;
+
+    constructor() {
+        const financeRepo = new PrismaFinanceRequestRepository();
+        const emailService = new EmailService();
+
+        this.financeRequestService = new FinanceRequestService(emailService, financeRepo);
+    }
 
     @Post('/new')
     @HttpCode(201)

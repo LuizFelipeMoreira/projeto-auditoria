@@ -61,4 +61,4 @@ class PrismaFinanceRequestRepository implements IFinanceRequest {
     }
 }
 
-export default new PrismaFinanceRequestRepository();
+export { PrismaFinanceRequestRepository };
