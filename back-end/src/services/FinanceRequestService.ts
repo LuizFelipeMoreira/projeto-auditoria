@@ -5,25 +5,33 @@ import { EmailService } from './EmailService';
 
 export class FinanceRequestService {
     constructor(
-        private readonly emailService = new EmailService(),
+        private readonly emailService: EmailService,
         private readonly financeRequestRepository = PrismaFinanceRequestRepository
     ) {}
 
     async create(financeRequest: FinanceRequestDTO) {
+        if (!financeRequest.value || !financeRequest.description) {
+            throw new BadRequestError('Campos obrigatórios não preenchidos');
+        }
+
         const newFinanceRequest = await this.financeRequestRepository.create(
             financeRequest
         );
 
         if (!newFinanceRequest) throw new BadRequestError('Erro interno no servidor');
 
-        const email = await this.emailService.notifyAdminSolicitation(
-            newFinanceRequest.user.name,
-            newFinanceRequest.loja.name,
-            newFinanceRequest.value,
-            newFinanceRequest.description
-        );
+        try {
+            const email = await this.emailService.notifyAdminSolicitation(
+                newFinanceRequest.user.name,
+                newFinanceRequest.loja.name,
+                newFinanceRequest.value,
+                newFinanceRequest.description
+            );
 
-        console.log(email);
+            console.log(email);
+        } catch (err) {
+            console.error('Falha ao enviar e-mail:', err);
+        }
 
         return newFinanceRequest;
     }
@@ -45,7 +53,7 @@ export class FinanceRequestService {
             description
         );
 
-        if (!finance) throw new BadRequestError('nao foi possivel localizar solicitaçao');
+        if (!finance) throw new BadRequestError('Não foi possível localizar solicitação');
 
         return finance;
     }
