@@ -18,7 +18,8 @@ export class FinanceRequestService {
             financeRequest
         );
 
-        if (!newFinanceRequest) throw new BadRequestError('Erro interno no servidor');
+        if (!newFinanceRequest)
+            throw new BadRequestError('Nao foi possivel criar nova finança');
 
         try {
             const email = await this.emailService.notifyAdminSolicitation(
@@ -49,6 +50,8 @@ export class FinanceRequestService {
     }
 
     async getFinanceByDescription(description: string) {
+        throw new BadRequestError('merda velha do caramba');
+
         const finance = await this.financeRequestRepository.getFinanceByDescription(
             description
         );

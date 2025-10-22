@@ -1,27 +1,25 @@
-import { NextFunction, Request, Response } from 'express';
-import { Middleware, ExpressMiddlewareInterface } from 'routing-controllers';
+import { Response } from 'express';
+import {
+    ExpressErrorMiddlewareInterface,
+    HttpError,
+    Middleware,
+} from 'routing-controllers';
 
 @Middleware({ type: 'after' })
-export class ErrorHandlerMiddleware implements ExpressMiddlewareInterface {
-    error(error: any, req: Request, res: Response, next: NextFunction) {
-        const status = error.httpCode || 500;
+export class ErrorHandlerMiddleware implements ExpressErrorMiddlewareInterface {
+    error(err: unknown, _: unknown, res: Response): void {
+        if (err instanceof HttpError) {
+            res.status(err.httpCode || 400).json({
+                status: 'Error',
+                message: err.message,
+            });
 
-        res.status(status).json({ message: error.message || 'erro interno no servidor' });
+            return;
+        }
+
+        res.status(500).json({
+            status: 'Erro',
+            message: 'Erro inesperado no servidor',
+        });
     }
 }
-
-// import { Request, Response, NextFunction } from 'express';
-// import { Middleware, ExpressErrorMiddlewareInterface } from 'routing-controllers';
-
-// @Middleware({ type: 'after' })
-// export class ErrorHandlerMiddleware implements ExpressErrorMiddlewareInterface {
-//   error(
-//     error: any,
-//     req: Request,
-//     res: Response,
-//     next: NextFunction
-//   ): void {
-//     const status = error.httpCode || 500;
-//     res.status(status).json({ message: error.message || 'Erro interno do servidor' });
-//   }
-// }

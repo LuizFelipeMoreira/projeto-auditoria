@@ -16,6 +16,7 @@ useExpressServer(app, {
     controllers: [AuthController, StoreController, FinanceRequestController],
     middlewares: [LoggerMiddleware, ErrorHandlerMiddleware],
     validation: true,
+    defaultErrorHandler: false,
     development: true,
 });
 
