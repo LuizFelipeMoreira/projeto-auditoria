@@ -40,6 +40,14 @@ class PrismaFinanceRequestRepository implements IFinanceRequest {
         return finances;
     }
 
+    async authorize(id: number, stattus: string) {
+        await prisma.financeRequest.update({
+            data: { status: 'APROVADO' },
+            where: { id },
+        });
+        return;
+    }
+
     async getFinanceByDescription(description: string) {
         const financeRequest = await prisma.financeRequest.findMany({
             where: { description },

@@ -10,6 +10,10 @@ export interface IFinanceRequest {
 
     delete: (id: number) => Promise<void>;
 
+    getFinances: (limit: number, offset: number) => Promise<FinanceRequestDTO[]>;
+
+    authorize: (id: number, status: string) => Promise<void>;
+
     getFinanceByDescription: (
         description: string
     ) => Promise<FinanceRequestResponseDTO[] | null>;

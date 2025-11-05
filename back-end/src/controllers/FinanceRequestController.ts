@@ -6,7 +6,7 @@ import { FinanceRequestService } from '../services/FinanceRequestService';
 
 @JsonController('/finance')
 export class FinanceRequestController {
-    private financeRequestService: FinanceRequestService;
+    private readonly financeRequestService: FinanceRequestService;
 
     constructor() {
         const financeRepo = new PrismaFinanceRequestRepository();

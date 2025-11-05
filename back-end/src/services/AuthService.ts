@@ -25,7 +25,7 @@ export class AuthService {
 
         const { id, name, lojaId, role } = existingUser;
 
-        const token = generateToken({ id, name, email });
+        const token = generateToken({ id, name, email, role });
 
         return {
             token,

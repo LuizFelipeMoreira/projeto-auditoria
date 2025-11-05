@@ -9,7 +9,7 @@ export class FinanceRequestService {
         private readonly financeRequestRepository: PrismaFinanceRequestRepository
     ) {}
 
-    async create(financeRequest: FinanceRequestDTO) {
+    public async create(financeRequest: FinanceRequestDTO) {
         if (!financeRequest.value || !financeRequest.description) {
             throw new BadRequestError('Campos obrigatórios não preenchidos');
         }
@@ -37,21 +37,25 @@ export class FinanceRequestService {
         return newFinanceRequest;
     }
 
-    async update(finance: FinanceRequestResponseDTO) {
+    public async update(finance: FinanceRequestResponseDTO) {
         const financeUpdated = await this.financeRequestRepository.update(finance);
 
         return financeUpdated;
     }
 
-    async getFinances(limit: number, offset: number) {
+    public async getFinances(limit: number, offset: number) {
         const finances = await this.financeRequestRepository.getFinances(limit, offset);
 
         return finances;
     }
 
-    async getFinanceByDescription(description: string) {
-        throw new BadRequestError('merda velha do caramba');
+    public async authorizeFinance(id: number, status: string) {
+        // verificacao de usuario para ver se é ADMIN
+        //
+        const answeredRequest = await this.financeRequestRepository.authorize(id, status);
+    }
 
+    public async getFinanceByDescription(description: string) {
         const finance = await this.financeRequestRepository.getFinanceByDescription(
             description
         );
