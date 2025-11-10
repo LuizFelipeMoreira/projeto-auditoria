@@ -2,6 +2,7 @@ import { BadRequestError } from 'routing-controllers';
 import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FinanceRequestDTO';
 import { PrismaFinanceRequestRepository } from '../repositories/financeRequest-repositorie/PrismaFinanceRequestRepository';
 import { EmailService } from './EmailService';
+import { $Enums } from '../generated/prisma';
 
 export class FinanceRequestService {
     constructor(
@@ -49,10 +50,8 @@ export class FinanceRequestService {
         return finances;
     }
 
-    public async authorizeFinance(id: number, status: string) {
-        // verificacao de usuario para ver se é ADMIN
-        //
-        const answeredRequest = await this.financeRequestRepository.authorize(id, status);
+    public async authorizeFinance(id: number, status: $Enums.STATUS) {
+        await this.financeRequestRepository.authorize(id, status);
     }
 
     public async getFinanceByDescription(description: string) {

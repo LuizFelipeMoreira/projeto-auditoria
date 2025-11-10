@@ -1,6 +1,7 @@
 import { $Enums } from '../generated/prisma';
 
 export interface FinanceRequestDTO {
+    id: number;
     description: string;
     value: number;
     status: $Enums.STATUS;
