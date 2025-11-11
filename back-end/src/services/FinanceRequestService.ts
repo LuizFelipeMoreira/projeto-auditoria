@@ -1,14 +1,19 @@
-import { BadRequestError } from 'routing-controllers';
+import { JwtPayload } from 'jsonwebtoken';
+import { BadRequestError, UnauthorizedError } from 'routing-controllers';
 import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FinanceRequestDTO';
-import { PrismaFinanceRequestRepository } from '../repositories/financeRequest-repositorie/PrismaFinanceRequestRepository';
-import { EmailService } from './EmailService';
 import { $Enums } from '../generated/prisma';
+import { PrismaFinanceRequestRepository } from '../repositories/financeRequest-repositorie/PrismaFinanceRequestRepository';
+import { JwTServices } from '../utils/jwt';
+import { EmailService } from './EmailService';
 
 export class FinanceRequestService {
+    private readonly jwtServices: JwTServices;
     constructor(
         private readonly emailService: EmailService,
         private readonly financeRequestRepository: PrismaFinanceRequestRepository
-    ) {}
+    ) {
+        this.jwtServices = new JwTServices();
+    }
 
     public async create(financeRequest: FinanceRequestDTO) {
         if (!financeRequest.value || !financeRequest.description) {
@@ -50,8 +55,22 @@ export class FinanceRequestService {
         return finances;
     }
 
-    public async authorizeFinance(id: number, status: $Enums.STATUS) {
+    public async authorizeFinance(token: string, id: number, status: $Enums.STATUS) {
+        if (!token) throw new UnauthorizedError('Token ausente');
+
+        const payload = this.jwtServices.verifyToken(token) as JwtPayload | Error;
+
+        if (payload instanceof Error) {
+            throw new UnauthorizedError('Token inválido');
+        }
+
+        if (payload.role !== 'ADMIN') {
+            throw new UnauthorizedError('Ação restrita a administradores');
+        }
+
         await this.financeRequestRepository.authorize(id, status);
+
+        return { message: 'Solicitação de finança atualizada com sucesso' };
     }
 
     public async getFinanceByDescription(description: string) {

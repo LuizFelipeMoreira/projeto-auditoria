@@ -1,10 +1,13 @@
 import { LoginRequestDTO } from '../dto/LoginDTO';
 import AuthRepository from '../repositories/auth-repositorie/PrismaAuthRepository';
 import { decodedPassword, hashPassword } from '../utils/hash';
-import { generateToken } from '../utils/jwt';
+import { JwTServices } from '../utils/jwt';
 
 export class AuthService {
-    constructor(private readonly authRepository = AuthRepository) {}
+    constructor(
+        private readonly authRepository = AuthRepository,
+        private readonly jstServices = new JwTServices()
+    ) {}
 
     async register(data: LoginRequestDTO) {
         const existingUser = await this.authRepository.findByEmail(data.email);
@@ -25,7 +28,7 @@ export class AuthService {
 
         const { id, name, lojaId, role } = existingUser;
 
-        const token = generateToken({ id, name, email, role });
+        const token = this.jstServices.generateToken({ id, name, email, role });
 
         return {
             token,

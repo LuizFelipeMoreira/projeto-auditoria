@@ -1,15 +1,26 @@
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt, { JwtPayload, SignOptions } from 'jsonwebtoken';
 
-const secret = process.env.JWT_SECRET || 'sua_chave_secreta';
+export class JwTServices {
+    private readonly secret: string;
+    private readonly expiresIn: string;
 
-export const generateToken = (payload: JwtPayload): string => {
-    return jwt.sign(payload, secret, { expiresIn: '1h' });
-};
-
-export const verifyToken = (token: string) => {
-    try {
-        return jwt.verify(token, secret);
-    } catch (error) {
-        return error;
+    constructor() {
+        this.secret = process.env.JWT_SECRET || 'default_secret_key';
+        this.expiresIn = '1h';
     }
-};
+
+    public generateToken = (payload: JwtPayload, options?: SignOptions): string => {
+        return jwt.sign(payload, this.secret, {
+            expiresIn: '1h',
+            ...options,
+        });
+    };
+
+    public verifyToken = (token: string) => {
+        try {
+            return jwt.verify(token, this.secret);
+        } catch (error) {
+            return error;
+        }
+    };
+}

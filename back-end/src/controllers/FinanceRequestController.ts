@@ -1,9 +1,10 @@
-import { Body, HttpCode, JsonController, Post } from 'routing-controllers';
+import { Request } from 'express';
+import { Body, HttpCode, JsonController, Post, Req } from 'routing-controllers';
 import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FinanceRequestDTO';
+import { $Enums } from '../generated/prisma';
 import { PrismaFinanceRequestRepository } from '../repositories/financeRequest-repositorie/PrismaFinanceRequestRepository';
 import { EmailService } from '../services/EmailService';
 import { FinanceRequestService } from '../services/FinanceRequestService';
-import { $Enums } from '../generated/prisma';
 
 @JsonController('/finance')
 export class FinanceRequestController {
@@ -30,8 +31,17 @@ export class FinanceRequestController {
 
     @Post('/authorize')
     @HttpCode(200)
-    async authorizeFinance(@Body() body: { id: number; status: $Enums.STATUS }) {
-        return await this.financeRequestService.authorizeFinance(body.id, body.status);
+    async authorizeFinance(
+        @Req() req: Request,
+        @Body() body: { id: number; status: $Enums.STATUS }
+    ) {
+        const token = req.headers.authorization?.split(' ')[1] || '';
+
+        return await this.financeRequestService.authorizeFinance(
+            token,
+            body.id,
+            body.status
+        );
     }
 
     @Post('/getByDescription')
