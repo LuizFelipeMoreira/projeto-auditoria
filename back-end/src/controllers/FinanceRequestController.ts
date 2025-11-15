@@ -1,12 +1,21 @@
 import { Request } from 'express';
-import { Body, HttpCode, JsonController, Post, Req } from 'routing-controllers';
+import {
+    Body,
+    HttpCode,
+    JsonController,
+    Post,
+    Req,
+    UseBefore,
+} from 'routing-controllers';
 import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FinanceRequestDTO';
 import { $Enums } from '../generated/prisma';
 import { PrismaFinanceRequestRepository } from '../repositories/financeRequest-repositorie/PrismaFinanceRequestRepository';
 import { EmailService } from '../services/EmailService';
 import { FinanceRequestService } from '../services/FinanceRequestService';
+import { JwtMiddleware } from '../middlewares/JwtMiddleware';
 
 @JsonController('/finance')
+@UseBefore(JwtMiddleware)
 export class FinanceRequestController {
     private readonly financeRequestService: FinanceRequestService;
 
