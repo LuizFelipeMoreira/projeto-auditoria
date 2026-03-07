@@ -22,7 +22,6 @@ export class FinanceRequestController {
     constructor() {
         const financeRepo = new PrismaFinanceRequestRepository();
         const emailService = new EmailService();
-
         this.financeRequestService = new FinanceRequestService(emailService, financeRepo);
     }
 

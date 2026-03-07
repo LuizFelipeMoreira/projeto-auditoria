@@ -20,9 +20,8 @@ export class FinanceRequestService {
             throw new BadRequestError('Campos obrigatórios não preenchidos');
         }
 
-        const newFinanceRequest = await this.financeRequestRepository.create(
-            financeRequest
-        );
+        const newFinanceRequest =
+            await this.financeRequestRepository.create(financeRequest);
 
         if (!newFinanceRequest)
             throw new BadRequestError('Nao foi possivel criar nova finança');
@@ -45,13 +44,11 @@ export class FinanceRequestService {
 
     public async update(finance: FinanceRequestResponseDTO) {
         const financeUpdated = await this.financeRequestRepository.update(finance);
-
         return financeUpdated;
     }
 
     public async getFinances(limit: number, offset: number) {
         const finances = await this.financeRequestRepository.getFinances(limit, offset);
-
         return finances;
     }
 
@@ -74,9 +71,8 @@ export class FinanceRequestService {
     }
 
     public async getFinanceByDescription(description: string) {
-        const finance = await this.financeRequestRepository.getFinanceByDescription(
-            description
-        );
+        const finance =
+            await this.financeRequestRepository.getFinanceByDescription(description);
 
         if (!finance) throw new BadRequestError('Não foi possível localizar solicitação');
 

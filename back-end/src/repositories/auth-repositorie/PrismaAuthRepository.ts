@@ -15,5 +15,3 @@ export class AuthRepository implements IUserRepository {
         return prisma.user.findUnique({ where: { id } });
     }
 }
-
-export default new AuthRepository();
