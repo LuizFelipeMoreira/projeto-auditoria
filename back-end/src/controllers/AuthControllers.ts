@@ -1,6 +1,6 @@
 import { Body, HttpCode, JsonController, Post } from 'routing-controllers';
 import { AuthService } from '../services/AuthService';
-import { LoginRequestDTO, LoginResponseDTO } from '../dto/LoginDTO';
+import { LoginRequestDTO } from '../dto/LoginDTO';
 import { AuthRepository } from '../repositories/auth-repositorie/PrismaAuthRepository';
 import { JwTServices } from '../utils/jwt';
 
@@ -17,13 +17,13 @@ export class AuthController {
 
     @Post('/signup')
     @HttpCode(201)
-    public async signup(@Body() body: LoginRequestDTO) {
-        return await this.authService.register(body);
+    public async signup(@Body() loginServiceDTO: LoginRequestDTO) {
+        return await this.authService.register(loginServiceDTO);
     }
 
     @Post('/signin')
     @HttpCode(201)
-    public async signin(@Body() body: LoginResponseDTO) {
-        return await this.authService.login(body.email, body.password);
+    public async signin(@Body() loginServiceDTO: LoginRequestDTO) {
+        return await this.authService.login(loginServiceDTO);
     }
 }
