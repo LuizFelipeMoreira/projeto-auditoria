@@ -1,9 +1,10 @@
-import { LoginRequestDTO, LoginResponseDTO } from '../../dto/LoginDTO';
+import { LoginRequestDTO } from '../../dto/LoginDTO';
+import { User } from '../../generated/prisma';
 
 export interface IUserRepository {
-    create(data: LoginRequestDTO): Promise<LoginResponseDTO | null>;
+    create(data: LoginRequestDTO): Promise<User | null>;
 
-    findByEmail(email: string): Promise<LoginResponseDTO | null>;
+    findByEmail(email: string): Promise<User | null>;
 
-    findById(id: number): Promise<LoginResponseDTO | null>;
+    findById(id: number): Promise<User | null>;
 }

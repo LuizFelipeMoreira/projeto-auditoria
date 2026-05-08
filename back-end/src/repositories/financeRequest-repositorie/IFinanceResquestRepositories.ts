@@ -2,20 +2,18 @@ import {
     FinanceRequestDTO,
     FinanceRequestResponseDTO,
 } from '../../dto/FinanceRequestDTO';
-import { $Enums } from '../../generated/prisma';
+import { $Enums, FinanceRequest } from '../../generated/prisma';
 
 export interface IFinanceRequest {
-    create: (finance: FinanceRequestDTO) => Promise<FinanceRequestResponseDTO>;
+    create: (finance: FinanceRequestDTO) => Promise<FinanceRequest>;
 
     update: (finance: FinanceRequestResponseDTO) => Promise<void>;
 
     delete: (id: number) => Promise<void>;
 
-    getFinances: (limit: number, offset: number) => Promise<FinanceRequestDTO[]>;
+    getFinances: (limit: number, offset: number) => Promise<FinanceRequest[]>;
 
     authorize: (id: number, status: $Enums.STATUS) => Promise<void>;
 
-    getFinanceByDescription: (
-        description: string
-    ) => Promise<FinanceRequestResponseDTO[] | null>;
+    getFinanceByDescription: (description: string) => Promise<FinanceRequest[] | null>;
 }

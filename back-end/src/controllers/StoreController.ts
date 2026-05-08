@@ -19,8 +19,6 @@ export class StoreController {
     async updateStore(@Body() body: StoreResponseDTO) {
         const storeUpdated = await this.storeService.update(body.id, body.name);
 
-        console.log(storeUpdated);
-
         return {
             ...storeUpdated,
         };

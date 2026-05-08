@@ -9,17 +9,20 @@ export class AuthService {
         private readonly jwtServices: JwTServices
     ) {}
 
-    async register(data: LoginRequestDTO) {
-        const existingUser = await this.authRepository.findByEmail(data.email);
+    async register(loginServiceDTO: LoginRequestDTO) {
+        const existingUser = await this.authRepository.findByEmail(loginServiceDTO.email);
         if (existingUser) return null;
 
-        const hash = await hashPassword(data.password);
-        const newUser = await this.authRepository.create({ ...data, password: hash });
+        const hash = await hashPassword(loginServiceDTO.password);
+        const newUser = await this.authRepository.create({
+            ...loginServiceDTO,
+            password: hash,
+        });
 
         return { id: newUser.id, name: newUser.name, email: newUser.email };
     }
 
-    async login(email: string, password: string) {
+    async login({ email, password }: LoginRequestDTO) {
         const existingUser = await this.authRepository.findByEmail(email);
         if (!existingUser) return null;
 
