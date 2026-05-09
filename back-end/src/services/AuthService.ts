@@ -1,3 +1,4 @@
+import { BadRequestError, NotFoundError } from 'routing-controllers';
 import { LoginRequestDTO } from '../dto/LoginDTO';
 import { AuthRepository } from '../repositories/auth-repositorie/PrismaAuthRepository';
 import { decodedPassword, hashPassword } from '../utils/hash';
@@ -11,7 +12,7 @@ export class AuthService {
 
     async register(loginServiceDTO: LoginRequestDTO) {
         const existingUser = await this.authRepository.findByEmail(loginServiceDTO.email);
-        if (existingUser) return null;
+        if (existingUser) throw new NotFoundError('Usuário já existe');
 
         const hash = await hashPassword(loginServiceDTO.password);
         const newUser = await this.authRepository.create({
@@ -24,10 +25,10 @@ export class AuthService {
 
     async login({ email, password }: LoginRequestDTO) {
         const existingUser = await this.authRepository.findByEmail(email);
-        if (!existingUser) return null;
+        if (!existingUser) throw new NotFoundError('Usuário não encontrado');
 
         const correctPassword = await decodedPassword(password, existingUser.password);
-        if (!correctPassword) return null;
+        if (!correctPassword) throw new BadRequestError('Senha incorreta');
 
         const { id, name, lojaId, role } = existingUser;
 
