@@ -17,13 +17,13 @@ export class AuthController {
 
     @Post('/signup')
     @HttpCode(201)
-    public async signup(@Body() loginServiceDTO: LoginRequestDTO) {
-        return await this.authService.register(loginServiceDTO);
+    public async signup(@Body() loginRequest: LoginRequestDTO) {
+        return await this.authService.register(loginRequest);
     }
 
     @Post('/signin')
     @HttpCode(201)
-    public async signin(@Body() loginServiceDTO: LoginRequestDTO) {
-        return await this.authService.login(loginServiceDTO);
+    public async signin(@Body() loginRequest: LoginRequestDTO) {
+        return await this.authService.login(loginRequest);
     }
 }
