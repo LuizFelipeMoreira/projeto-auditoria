@@ -7,7 +7,7 @@ import {
     Req,
     UseBefore,
 } from 'routing-controllers';
-import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FinanceRequestDTO';
+import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FInanceRequestDTO';
 import { $Enums } from '../generated/prisma';
 import { PrismaFinanceRequestRepository } from '../repositories/financeRequest-repositorie/PrismaFinanceRequestRepository';
 import { EmailService } from '../services/EmailService';

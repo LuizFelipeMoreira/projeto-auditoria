@@ -3,10 +3,10 @@ import express from 'express';
 import 'reflect-metadata';
 import { useExpressServer } from 'routing-controllers';
 import { AuthController } from './controllers/AuthControllers';
-import { StoreController } from './controllers/StoreController';
-import { LoggerMiddleware } from './middlewares/LoggerMiddleware';
 import { FinanceRequestController } from './controllers/FinanceRequestController';
+import { StoreController } from './controllers/StoreController';
 import { ErrorHandlerMiddleware } from './middlewares/ErrorHandlerMiddleware';
+import { LoggerMiddleware } from './middlewares/LoggerMiddleware';
 
 const app = express();
 
@@ -15,7 +15,7 @@ app.use(cors());
 useExpressServer(app, {
     controllers: [AuthController, StoreController, FinanceRequestController],
     middlewares: [LoggerMiddleware, ErrorHandlerMiddleware],
-    validation: true,
+    validation: false,
     defaultErrorHandler: false,
     development: true,
 });
