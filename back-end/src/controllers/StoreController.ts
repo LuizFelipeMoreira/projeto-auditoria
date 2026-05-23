@@ -4,7 +4,7 @@ import { Body, HttpCode, JsonController, Post } from 'routing-controllers';
 
 @JsonController('/store')
 export class StoreController {
-    constructor(private readonly storeService = new StoreService()) {}
+    constructor(private readonly storeService: StoreService) {}
 
     @Post('/create')
     @HttpCode(201)

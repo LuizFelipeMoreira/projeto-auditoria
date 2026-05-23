@@ -9,21 +9,13 @@ import {
 } from 'routing-controllers';
 import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FInanceRequestDTO';
 import { $Enums } from '../generated/prisma';
-import { PrismaFinanceRequestRepository } from '../repositories/financeRequest-repositorie/PrismaFinanceRequestRepository';
-import { EmailService } from '../services/EmailService';
 import { FinanceRequestService } from '../services/FinanceRequestService';
 import { JwtMiddleware } from '../middlewares/JwtMiddleware';
 
 @JsonController('/finance')
 @UseBefore(JwtMiddleware)
 export class FinanceRequestController {
-    private readonly financeRequestService: FinanceRequestService;
-
-    constructor() {
-        const financeRepo = new PrismaFinanceRequestRepository();
-        const emailService = new EmailService();
-        this.financeRequestService = new FinanceRequestService(emailService, financeRepo);
-    }
+    constructor(private readonly financeRequestService: FinanceRequestService) {}
 
     @Post('/new')
     @HttpCode(201)

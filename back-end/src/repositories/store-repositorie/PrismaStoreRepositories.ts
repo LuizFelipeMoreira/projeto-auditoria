@@ -19,4 +19,4 @@ class PrismaStoreRepository implements IStoreRepositories {
     }
 }
 
-export default new PrismaStoreRepository();
+export { PrismaStoreRepository };

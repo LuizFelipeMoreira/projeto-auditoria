@@ -1,7 +1,7 @@
-import PrismaStoreRepositories from '../repositories/store-repositorie/PrismaStoreRepositories';
+import { PrismaStoreRepository } from '../repositories/store-repositorie/PrismaStoreRepositories';
 
 export class StoreService {
-    constructor(private readonly storeRepository = PrismaStoreRepositories) {}
+    constructor(private readonly storeRepository: PrismaStoreRepository) {}
 
     async create(name: string) {
         return await this.storeRepository.create(name);

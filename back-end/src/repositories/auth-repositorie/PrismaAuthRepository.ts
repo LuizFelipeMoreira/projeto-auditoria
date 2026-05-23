@@ -3,7 +3,7 @@ import { User } from '../../generated/prisma';
 import { prisma } from '../../lib/prisma';
 import { IUserRepository } from './IAuthRepository';
 
-export class AuthRepository implements IUserRepository {
+class PrismaAuthRepository implements IUserRepository {
     async create(data: LoginRequestDTO): Promise<User> {
         return prisma.user.create({ data });
     }
@@ -16,3 +16,5 @@ export class AuthRepository implements IUserRepository {
         return prisma.user.findUnique({ where: { id } });
     }
 }
+
+export { PrismaAuthRepository };

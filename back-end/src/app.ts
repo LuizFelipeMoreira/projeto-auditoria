@@ -1,16 +1,18 @@
 import cors from 'cors';
 import express from 'express';
 import 'reflect-metadata';
-import { useExpressServer } from 'routing-controllers';
+import { useContainer, useExpressServer } from 'routing-controllers';
 import { AuthController } from './controllers/AuthControllers';
 import { FinanceRequestController } from './controllers/FinanceRequestController';
 import { StoreController } from './controllers/StoreController';
 import { ErrorHandlerMiddleware } from './middlewares/ErrorHandlerMiddleware';
 import { LoggerMiddleware } from './middlewares/LoggerMiddleware';
-
+import { appContainer } from './container';
 const app = express();
 
 app.use(cors());
+
+useContainer(appContainer);
 
 useExpressServer(app, {
     controllers: [AuthController, StoreController, FinanceRequestController],
