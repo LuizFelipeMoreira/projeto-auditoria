@@ -5,7 +5,7 @@ import {
     Middleware,
     UnauthorizedError,
 } from 'routing-controllers';
-import { JwTServices } from '../utils/jwt';
+import { JwTServices } from '../utils/jwt.service';
 
 @Middleware({ type: 'before' })
 export class JwtMiddleware implements ExpressMiddlewareInterface {

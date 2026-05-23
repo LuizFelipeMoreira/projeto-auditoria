@@ -7,10 +7,10 @@ import {
     Req,
     UseBefore,
 } from 'routing-controllers';
-import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FInanceRequestDTO';
+import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/finance-request.dto';
 import { $Enums } from '../generated/prisma';
-import { FinanceRequestService } from '../services/FinanceRequestService';
-import { JwtMiddleware } from '../middlewares/JwtMiddleware';
+import { FinanceRequestService } from '../services/finance-request.service';
+import { JwtMiddleware } from '../middlewares/jwt.middleware';
 
 @JsonController('/finance')
 @UseBefore(JwtMiddleware)

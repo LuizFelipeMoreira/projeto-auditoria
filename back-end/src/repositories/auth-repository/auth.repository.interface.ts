@@ -1,4 +1,4 @@
-import { LoginRequestDTO } from '../../dto/LoginDTO';
+import { LoginRequestDTO } from '../../dto/login.dto';
 import { User } from '../../generated/prisma';
 
 export interface IUserRepository {

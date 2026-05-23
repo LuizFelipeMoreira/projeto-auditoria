@@ -1,5 +1,5 @@
 import { prisma } from '../../lib/prisma';
-import { IStoreRepositories } from './IStoreRepositories';
+import { IStoreRepositories } from './store.repository.interface';
 
 class PrismaStoreRepository implements IStoreRepositories {
     async create(name: string) {

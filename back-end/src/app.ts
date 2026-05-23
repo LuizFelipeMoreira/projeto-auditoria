@@ -2,11 +2,11 @@ import cors from 'cors';
 import express from 'express';
 import 'reflect-metadata';
 import { useContainer, useExpressServer } from 'routing-controllers';
-import { AuthController } from './controllers/AuthControllers';
-import { FinanceRequestController } from './controllers/FinanceRequestController';
-import { StoreController } from './controllers/StoreController';
-import { ErrorHandlerMiddleware } from './middlewares/ErrorHandlerMiddleware';
-import { LoggerMiddleware } from './middlewares/LoggerMiddleware';
+import { AuthController } from './controllers/auth.controller';
+import { FinanceRequestController } from './controllers/finance-request.controller';
+import { StoreController } from './controllers/store.controller';
+import { ErrorHandlerMiddleware } from './middlewares/error-handler.middleware';
+import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { appContainer } from './container';
 const app = express();
 

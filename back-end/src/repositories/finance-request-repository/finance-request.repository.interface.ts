@@ -1,7 +1,7 @@
 import {
     FinanceRequestDTO,
     FinanceRequestResponseDTO,
-} from '../../dto/FInanceRequestDTO';
+} from '../../dto/finance-request.dto';
 import { $Enums, FinanceRequest } from '../../generated/prisma';
 
 export interface IFinanceRequest {

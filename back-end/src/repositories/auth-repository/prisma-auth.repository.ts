@@ -1,7 +1,7 @@
-import { LoginRequestDTO } from '../../dto/LoginDTO';
+import { LoginRequestDTO } from '../../dto/login.dto';
 import { User } from '../../generated/prisma';
 import { prisma } from '../../lib/prisma';
-import { IUserRepository } from './IAuthRepository';
+import { IUserRepository } from './auth.repository.interface';
 
 class PrismaAuthRepository implements IUserRepository {
     async create(data: LoginRequestDTO): Promise<User> {

@@ -1,7 +1,7 @@
 import { Body, HttpCode, JsonController, Post } from 'routing-controllers';
-import { LoginRequestDTO } from '../dto/LoginDTO';
-//import { ValidateBody } from '../middlewares/ValidationMiddleware';
-import { AuthService } from '../services/AuthService';
+import { LoginRequestDTO } from '../dto/login.dto';
+//import { ValidateBody } from '../middlewares/validation.middleware';
+import { AuthService } from '../services/auth.service';
 
 @JsonController('/auth')
 export class AuthController {

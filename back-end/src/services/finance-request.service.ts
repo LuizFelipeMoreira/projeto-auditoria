@@ -1,10 +1,10 @@
 import { JwtPayload } from 'jsonwebtoken';
 import { BadRequestError, UnauthorizedError } from 'routing-controllers';
-import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/FInanceRequestDTO';
+import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/finance-request.dto';
 import { $Enums } from '../generated/prisma';
-import { PrismaFinanceRequestRepository } from '../repositories/financeRequest-repositorie/PrismaFinanceRequestRepository';
-import { JwTServices } from '../utils/jwt';
-import { EmailService } from './EmailService';
+import { PrismaFinanceRequestRepository } from '../repositories/finance-request-repository/prisma-finance-request.repository';
+import { JwTServices } from '../utils/jwt.service';
+import { EmailService } from './email.service';
 
 export class FinanceRequestService {
     private readonly jwtServices: JwTServices;

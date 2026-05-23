@@ -1,7 +1,7 @@
-import { FinanceRequestDTO } from '../../dto/FinanceRequestDTO';
+import { FinanceRequestDTO } from '../../dto/finance-request.dto';
 import { $Enums } from '../../generated/prisma';
 import { prisma } from '../../lib/prisma';
-import { IFinanceRequest } from './IFinanceResquestRepositories';
+import { IFinanceRequest } from './finance-request.repository.interface';
 
 class PrismaFinanceRequestRepository implements IFinanceRequest {
     async create(finance: Omit<FinanceRequestDTO, 'id'>) {

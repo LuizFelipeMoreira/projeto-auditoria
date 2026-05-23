@@ -1,8 +1,8 @@
 import { BadRequestError, NotFoundError } from 'routing-controllers';
-import { LoginRequestDTO } from '../dto/LoginDTO';
-import { PrismaAuthRepository } from '../repositories/auth-repositorie/PrismaAuthRepository';
-import { decodedPassword, hashPassword } from '../utils/hash';
-import { JwTServices } from '../utils/jwt';
+import { LoginRequestDTO } from '../dto/login.dto';
+import { PrismaAuthRepository } from '../repositories/auth-repository/prisma-auth.repository';
+import { decodedPassword, hashPassword } from '../utils/hash.util';
+import { JwTServices } from '../utils/jwt.service';
 
 export class AuthService {
     constructor(

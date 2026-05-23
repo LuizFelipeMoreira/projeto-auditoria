@@ -1,5 +1,5 @@
-import { StoreRequestDTO, StoreResponseDTO } from '../dto/StoreDTO';
-import { StoreService } from '../services/StoreService';
+import { StoreRequestDTO, StoreResponseDTO } from '../dto/store.dto';
+import { StoreService } from '../services/store.service';
 import { Body, HttpCode, JsonController, Post } from 'routing-controllers';
 
 @JsonController('/store')

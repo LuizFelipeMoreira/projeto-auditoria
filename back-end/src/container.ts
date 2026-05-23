@@ -1,17 +1,17 @@
-import { PrismaFinanceRequestRepository } from './repositories/financeRequest-repositorie/PrismaFinanceRequestRepository';
-import { PrismaStoreRepository } from './repositories/store-repositorie/PrismaStoreRepositories';
-import { PrismaAuthRepository } from './repositories/auth-repositorie/PrismaAuthRepository';
+import { PrismaFinanceRequestRepository } from './repositories/finance-request-repository/prisma-finance-request.repository';
+import { PrismaStoreRepository } from './repositories/store-repository/prisma-store.repository';
+import { PrismaAuthRepository } from './repositories/auth-repository/prisma-auth.repository';
 
-import { AuthService } from './services/AuthService';
-import { StoreService } from './services/StoreService';
-import { FinanceRequestService } from './services/FinanceRequestService';
-import { EmailService } from './services/EmailService';
+import { AuthService } from './services/auth.service';
+import { StoreService } from './services/store.service';
+import { FinanceRequestService } from './services/finance-request.service';
+import { EmailService } from './services/email.service';
 
-import { AuthController } from './controllers/AuthControllers';
-import { StoreController } from './controllers/StoreController';
-import { FinanceRequestController } from './controllers/FinanceRequestController';
+import { AuthController } from './controllers/auth.controller';
+import { StoreController } from './controllers/store.controller';
+import { FinanceRequestController } from './controllers/finance-request.controller';
 
-import { JwTServices } from './utils/jwt';
+import { JwTServices } from './utils/jwt.service';
 
 export class AppContainer {
     private instances = new Map();

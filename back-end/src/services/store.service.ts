@@ -1,4 +1,4 @@
-import { PrismaStoreRepository } from '../repositories/store-repositorie/PrismaStoreRepositories';
+import { PrismaStoreRepository } from '../repositories/store-repository/prisma-store.repository';
 
 export class StoreService {
     constructor(private readonly storeRepository: PrismaStoreRepository) {}
