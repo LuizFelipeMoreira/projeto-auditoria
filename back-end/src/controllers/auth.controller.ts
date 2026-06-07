@@ -1,12 +1,4 @@
-import {
-    Body,
-    HttpCode,
-    JsonController,
-    Post,
-    Req,
-    UseBefore,
-} from 'routing-controllers';
-import { LoginRequestDTO } from '../dto/login.dto';
+import { HttpCode, JsonController, Post, Req, UseBefore } from 'routing-controllers';
 import { ValidateBody } from '../middlewares/validation.middleware';
 import { AuthService } from '../services/auth.service';
 import { Request } from 'express';

@@ -5,6 +5,7 @@ import {
     Middleware,
     UnauthorizedError,
 } from 'routing-controllers';
+import { AuthenticatedUserPayload } from '../types/express';
 import { JwTServices } from '../utils/jwt.service';
 
 @Middleware({ type: 'before' })
@@ -20,6 +21,8 @@ export class JwtMiddleware implements ExpressMiddlewareInterface {
         if (payload instanceof Error) {
             throw new UnauthorizedError('Token inválido');
         }
+
+        req.user = payload as AuthenticatedUserPayload;
 
         next();
     }

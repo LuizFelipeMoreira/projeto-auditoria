@@ -1,19 +1,14 @@
-import { JwtPayload } from 'jsonwebtoken';
-import { BadRequestError, UnauthorizedError } from 'routing-controllers';
+import { BadRequestError } from 'routing-controllers';
 import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/finance-request.dto';
 import { $Enums } from '../generated/prisma';
 import { PrismaFinanceRequestRepository } from '../repositories/finance-request-repository/prisma-finance-request.repository';
-import { JwTServices } from '../utils/jwt.service';
 import { EmailService } from './email.service';
 
 export class FinanceRequestService {
-    private readonly jwtServices: JwTServices;
     constructor(
         private readonly emailService: EmailService,
         private readonly financeRequestRepository: PrismaFinanceRequestRepository
-    ) {
-        this.jwtServices = new JwTServices();
-    }
+    ) {}
 
     public async create(financeRequest: FinanceRequestDTO) {
         if (!financeRequest.value || !financeRequest.description) {
@@ -52,19 +47,7 @@ export class FinanceRequestService {
         return finances;
     }
 
-    public async authorizeFinance(token: string, id: number, status: $Enums.STATUS) {
-        if (!token) throw new UnauthorizedError('Token ausente');
-
-        const payload = this.jwtServices.verifyToken(token) as JwtPayload | Error;
-
-        if (payload instanceof Error) {
-            throw new UnauthorizedError('Token inválido');
-        }
-
-        if (payload.role !== 'ADMIN') {
-            throw new UnauthorizedError('Ação restrita a administradores');
-        }
-
+    public async authorizeFinance(id: number, status: $Enums.STATUS) {
         await this.financeRequestRepository.authorize(id, status);
 
         return { message: 'Solicitação de finança atualizada com sucesso' };

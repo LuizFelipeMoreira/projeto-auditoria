@@ -1,16 +1,15 @@
-import { Request } from 'express';
 import {
     Body,
     HttpCode,
     JsonController,
     Post,
-    Req,
     UseBefore,
 } from 'routing-controllers';
 import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/finance-request.dto';
 import { $Enums } from '../generated/prisma';
 import { FinanceRequestService } from '../services/finance-request.service';
 import { JwtMiddleware } from '../middlewares/jwt.middleware';
+import { AdminOnlyMiddleware } from '../middlewares/admin-only.middleware';
 
 @JsonController('/finance')
 @UseBefore(JwtMiddleware)
@@ -30,18 +29,10 @@ export class FinanceRequestController {
     }
 
     @Post('/authorize')
+    @UseBefore(AdminOnlyMiddleware)
     @HttpCode(200)
-    async authorizeFinance(
-        @Req() req: Request,
-        @Body() body: { id: number; status: $Enums.STATUS }
-    ) {
-        const token = req.headers.authorization?.split(' ')[1] || '';
-
-        return await this.financeRequestService.authorizeFinance(
-            token,
-            body.id,
-            body.status
-        );
+    async authorizeFinance(@Body() body: { id: number; status: $Enums.STATUS }) {
+        return await this.financeRequestService.authorizeFinance(body.id, body.status);
     }
 
     @Post('/getByDescription')
