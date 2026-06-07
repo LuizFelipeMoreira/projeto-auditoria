@@ -10,6 +10,13 @@ import { $Enums } from '../generated/prisma';
 import { FinanceRequestService } from '../services/finance-request.service';
 import { JwtMiddleware } from '../middlewares/jwt.middleware';
 import { AdminOnlyMiddleware } from '../middlewares/admin-only.middleware';
+import { ValidateBody } from '../middlewares/validation.middleware';
+import {
+    authorizeFinanceRequestSchema,
+    createFinanceRequestSchema,
+    getFinanceByDescriptionSchema,
+    updateFinanceRequestSchema,
+} from '../schemas/finance-request.shemas';
 
 @JsonController('/finance')
 @UseBefore(JwtMiddleware)
@@ -17,18 +24,21 @@ export class FinanceRequestController {
     constructor(private readonly financeRequestService: FinanceRequestService) {}
 
     @Post('/new')
+    @UseBefore(ValidateBody(createFinanceRequestSchema))
     @HttpCode(201)
     async create(@Body() body: FinanceRequestDTO) {
         return await this.financeRequestService.create(body);
     }
 
     @Post('/update')
+    @UseBefore(ValidateBody(updateFinanceRequestSchema))
     @HttpCode(201)
     async update(@Body() body: FinanceRequestResponseDTO) {
         return await this.financeRequestService.update(body);
     }
 
     @Post('/authorize')
+    @UseBefore(ValidateBody(authorizeFinanceRequestSchema))
     @UseBefore(AdminOnlyMiddleware)
     @HttpCode(200)
     async authorizeFinance(@Body() body: { id: number; status: $Enums.STATUS }) {
@@ -36,6 +46,7 @@ export class FinanceRequestController {
     }
 
     @Post('/getByDescription')
+    @UseBefore(ValidateBody(getFinanceByDescriptionSchema))
     @HttpCode(200)
     async getFinanceByDescription(@Body() body: { description: string }) {
         return await this.financeRequestService.getFinanceByDescription(body.description);
