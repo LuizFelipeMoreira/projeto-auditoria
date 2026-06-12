@@ -1,13 +1,13 @@
 import {
     CreateFinanceRequestDTO,
-    FinanceRequestResponseDTO,
+    UpdateFinanceRequestDTO,
 } from '../../dto/finance-request.dto';
 import { $Enums, FinanceRequest } from '../../generated/prisma';
 
 export interface IFinanceRequest {
     create: (finance: CreateFinanceRequestDTO) => Promise<FinanceRequest>;
 
-    update: (finance: FinanceRequestResponseDTO) => Promise<void>;
+    update: (finance: UpdateFinanceRequestDTO) => Promise<void>;
 
     delete: (id: number) => Promise<void>;
 

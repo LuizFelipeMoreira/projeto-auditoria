@@ -1,7 +1,7 @@
 import { Body, HttpCode, JsonController, Post, UseBefore } from 'routing-controllers';
 import {
     CreateFinanceRequestDTO,
-    FinanceRequestResponseDTO,
+    UpdateFinanceRequestDTO,
 } from '../dto/finance-request.dto';
 import { $Enums } from '../generated/prisma';
 import { FinanceRequestService } from '../services/finance-request.service';
@@ -30,7 +30,7 @@ export class FinanceRequestController {
     @Post('/update')
     @UseBefore(ValidateBody(updateFinanceRequestSchema))
     @HttpCode(201)
-    async update(@Body() body: FinanceRequestResponseDTO) {
+    async update(@Body() body: UpdateFinanceRequestDTO) {
         return await this.financeRequestService.update(body);
     }
 

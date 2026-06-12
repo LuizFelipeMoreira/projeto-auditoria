@@ -1,6 +1,6 @@
 import {
     CreateFinanceRequestDTO,
-    FinanceRequestResponseDTO,
+    UpdateFinanceRequestDTO,
 } from '../../dto/finance-request.dto';
 import { $Enums } from '../../generated/prisma';
 import { prisma } from '../../lib/prisma';
@@ -9,7 +9,7 @@ import { IFinanceRequest } from './finance-request.repository.interface';
 class PrismaFinanceRequestRepository implements IFinanceRequest {
     async create(finance: CreateFinanceRequestDTO) {
         const newFinance = await prisma.financeRequest.create({
-            data: { ...finance },
+            data: { ...finance, status: $Enums.STATUS.AGUARDANDO },
             include: {
                 user: {
                     select: {
@@ -24,7 +24,7 @@ class PrismaFinanceRequestRepository implements IFinanceRequest {
         return newFinance;
     }
 
-    async update(finance: Omit<FinanceRequestResponseDTO, 'user' | 'loja'>) {
+    async update(finance: UpdateFinanceRequestDTO) {
         await prisma.financeRequest.update({
             where: { id: finance.id },
             data: { ...finance },

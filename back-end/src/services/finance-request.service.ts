@@ -1,5 +1,8 @@
 import { BadRequestError } from 'routing-controllers';
-import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/finance-request.dto';
+import {
+    CreateFinanceRequestDTO,
+    UpdateFinanceRequestDTO,
+} from '../dto/finance-request.dto';
 import { $Enums } from '../generated/prisma';
 import { PrismaFinanceRequestRepository } from '../repositories/finance-request-repository/prisma-finance-request.repository';
 import { EmailService } from './email.service';
@@ -10,7 +13,7 @@ export class FinanceRequestService {
         private readonly financeRequestRepository: PrismaFinanceRequestRepository
     ) {}
 
-    public async create(financeRequest: FinanceRequestDTO) {
+    public async create(financeRequest: CreateFinanceRequestDTO) {
         if (!financeRequest.value || !financeRequest.description) {
             throw new BadRequestError('Campos obrigatórios não preenchidos');
         }
@@ -37,7 +40,7 @@ export class FinanceRequestService {
         return newFinanceRequest;
     }
 
-    public async update(finance: FinanceRequestResponseDTO) {
+    public async update(finance: UpdateFinanceRequestDTO) {
         const financeUpdated = await this.financeRequestRepository.update(finance);
         return financeUpdated;
     }

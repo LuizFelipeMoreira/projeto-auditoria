@@ -8,6 +8,8 @@ export interface CreateFinanceRequestDTO {
     lojaId: number;
 }
 
+export type UpdateFinanceRequestDTO = Omit<FinanceRequestResponseDTO, 'loja' | 'user'>;
+
 export interface FinanceRequestResponseDTO {
     id: number;
     description: string;
