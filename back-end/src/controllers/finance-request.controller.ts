@@ -1,11 +1,8 @@
+import { Body, HttpCode, JsonController, Post, UseBefore } from 'routing-controllers';
 import {
-    Body,
-    HttpCode,
-    JsonController,
-    Post,
-    UseBefore,
-} from 'routing-controllers';
-import { FinanceRequestDTO, FinanceRequestResponseDTO } from '../dto/finance-request.dto';
+    CreateFinanceRequestDTO,
+    FinanceRequestResponseDTO,
+} from '../dto/finance-request.dto';
 import { $Enums } from '../generated/prisma';
 import { FinanceRequestService } from '../services/finance-request.service';
 import { JwtMiddleware } from '../middlewares/jwt.middleware';
@@ -26,7 +23,7 @@ export class FinanceRequestController {
     @Post('/new')
     @UseBefore(ValidateBody(createFinanceRequestSchema))
     @HttpCode(201)
-    async create(@Body() body: FinanceRequestDTO) {
+    async create(@Body() body: CreateFinanceRequestDTO) {
         return await this.financeRequestService.create(body);
     }
 

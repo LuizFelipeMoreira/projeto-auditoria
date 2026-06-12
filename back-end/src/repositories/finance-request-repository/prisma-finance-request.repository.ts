@@ -1,10 +1,13 @@
-import { FinanceRequestDTO } from '../../dto/finance-request.dto';
+import {
+    CreateFinanceRequestDTO,
+    FinanceRequestResponseDTO,
+} from '../../dto/finance-request.dto';
 import { $Enums } from '../../generated/prisma';
 import { prisma } from '../../lib/prisma';
 import { IFinanceRequest } from './finance-request.repository.interface';
 
 class PrismaFinanceRequestRepository implements IFinanceRequest {
-    async create(finance: Omit<FinanceRequestDTO, 'id'>) {
+    async create(finance: CreateFinanceRequestDTO) {
         const newFinance = await prisma.financeRequest.create({
             data: { ...finance },
             include: {
@@ -21,7 +24,7 @@ class PrismaFinanceRequestRepository implements IFinanceRequest {
         return newFinance;
     }
 
-    async update(finance: FinanceRequestDTO) {
+    async update(finance: Omit<FinanceRequestResponseDTO, 'user' | 'loja'>) {
         await prisma.financeRequest.update({
             where: { id: finance.id },
             data: { ...finance },
