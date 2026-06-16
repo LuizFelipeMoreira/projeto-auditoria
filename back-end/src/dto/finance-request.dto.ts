@@ -14,7 +14,6 @@ export interface FinanceRequestResponseDTO {
     id: number;
     description: string;
     value: number;
-    status: $Enums.STATUS;
     solicitante: number;
     lojaId: number;
     user: {
