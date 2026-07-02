@@ -1,4 +1,11 @@
-import { Body, HttpCode, JsonController, Post, UseBefore } from 'routing-controllers';
+import {
+    Body,
+    HttpCode,
+    JsonController,
+    Post,
+    Req,
+    UseBefore,
+} from 'routing-controllers';
 import {
     CreateFinanceRequestDTO,
     UpdateFinanceRequestDTO,
@@ -14,6 +21,7 @@ import {
     getFinanceByDescriptionSchema,
     updateFinanceRequestSchema,
 } from '../schemas/finance-request.shemas';
+import { Request } from 'express';
 
 @JsonController('/finance')
 @UseBefore(JwtMiddleware)
@@ -23,8 +31,8 @@ export class FinanceRequestController {
     @Post('/new')
     @UseBefore(ValidateBody(createFinanceRequestSchema))
     @HttpCode(201)
-    async create(@Body() body: CreateFinanceRequestDTO) {
-        return await this.financeRequestService.create(body);
+    async create(@Req() req: Request) {
+        return await this.financeRequestService.create(req.body);
     }
 
     @Post('/update')
